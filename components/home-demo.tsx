@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   Box,
   Button,
@@ -20,7 +22,49 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+type HealthResponse = {
+  ok: boolean;
+  status?: number;
+  upstreamUrl?: string;
+  checkedAt?: string;
+  payload?: unknown;
+  message?: string;
+  details?: string;
+};
+
 export function HomeDemo() {
+  const [healthResponse, setHealthResponse] = useState<HealthResponse | null>(
+    null,
+  );
+  const [requestError, setRequestError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleMakeApiCall() {
+    setIsLoading(true);
+    setRequestError(null);
+
+    try {
+      const response = await fetch("/api/health", {
+        method: "GET",
+        cache: "no-store",
+      });
+      const data = (await response.json()) as HealthResponse;
+
+      if (!response.ok) {
+        throw new Error(data.message ?? "Health check failed");
+      }
+
+      setHealthResponse(data);
+    } catch (error) {
+      setHealthResponse(null);
+      setRequestError(
+        error instanceof Error ? error.message : "Unexpected request error",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <Box
       position="relative"
@@ -293,7 +337,63 @@ export function HomeDemo() {
                 >
                   Solicitar acceso mágico
                 </Button>
+
+                <Button
+                  rounded="full"
+                  variant="outline"
+                  borderColor="rgba(23,23,23,0.12)"
+                  color="#171717"
+                  bg="rgba(255,255,255,0.45)"
+                  _hover={{ bg: "rgba(255,255,255,0.9)" }}
+                  loading={isLoading}
+                  onClick={handleMakeApiCall}
+                >
+                  make API call
+                </Button>
               </Stack>
+
+              {(healthResponse || requestError) && (
+                <Box
+                  rounded="24px"
+                  bg="#fbf8f3"
+                  border="1px solid rgba(23,23,23,0.08)"
+                  p="4"
+                >
+                  <Stack gap="2">
+                    <Text fontSize="sm" fontWeight="700" color="#2d2a26">
+                      API health response
+                    </Text>
+
+                    {requestError ? (
+                      <Text color="#b42318" fontSize="sm">
+                        {requestError}
+                      </Text>
+                    ) : (
+                      <>
+                        <Text fontSize="sm" color="#6e6a64">
+                          {healthResponse?.upstreamUrl}
+                        </Text>
+                        <Text fontSize="sm" color="#6e6a64">
+                          status: {healthResponse?.status} · checkedAt:{" "}
+                          {healthResponse?.checkedAt}
+                        </Text>
+                        <Box
+                          as="pre"
+                          m="0"
+                          p="3"
+                          rounded="16px"
+                          overflowX="auto"
+                          fontSize="xs"
+                          bg="rgba(23,23,23,0.04)"
+                          whiteSpace="pre-wrap"
+                        >
+                          {JSON.stringify(healthResponse?.payload, null, 2)}
+                        </Box>
+                      </>
+                    )}
+                  </Stack>
+                </Box>
+              )}
 
               <Text textAlign="center" color="#726c66">
                 ¿Aún no tienes cuenta?{" "}
