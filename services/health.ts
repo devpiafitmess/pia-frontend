@@ -1,7 +1,7 @@
 import "server-only";
 
-import { apiRequest } from "@/lib/api/client";
-import { getServerEnv } from "@/lib/env";
+import { apiRequest } from "@lib/api/client";
+import { getServerEnv } from "@lib/env";
 import type { HealthCheckResult } from "@/types/health";
 
 async function readHealthPayload(response: Response) {
