@@ -1,6 +1,6 @@
 import "server-only";
 
-import { ApiRequestError } from "@/lib/api/errors";
+import { ApiRequestError } from "@lib/api/errors";
 
 type ApiRequestOptions = Omit<RequestInit, "body"> & {
   baseUrl: string;

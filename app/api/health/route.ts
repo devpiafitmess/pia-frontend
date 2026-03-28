@@ -1,6 +1,6 @@
-import { getHealthStatus } from "@/services/health";
-import { ApiRequestError, getErrorMessage } from "@/lib/api/errors";
-import { logServerError, logServerEvent } from "@/lib/logger";
+import { getHealthStatus } from "@services/health";
+import { ApiRequestError, getErrorMessage } from "@lib/api/errors";
+import { logServerError, logServerEvent } from "@lib/logger";
 
 export const dynamic = "force-dynamic";
 

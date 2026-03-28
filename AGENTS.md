@@ -71,3 +71,24 @@ Never protect routes only at the page level. Both layers must be present.
 - Never import from `services/` or `lib/` in client components or hooks. Only `types/` is shared across boundaries.
 - Env vars are read exclusively through `lib/env.ts` — never access `process.env` directly outside of it.
 <!-- END:architecture -->
+
+<!-- BEGIN:ui -->
+# UI
+
+Chakra UI is the mandatory frontend library. Always reach for Chakra first — layouts, typography, forms, modals, drawers, tables, skeletons, spinners, toasts, icons — if Chakra provides it natively, use it. Only go outside Chakra when it provably cannot satisfy the requirement (e.g. a canvas-based chart, a map, a rich-text editor). Document the reason in a comment when you do.
+
+## Decision order
+
+1. **Chakra UI built-in component** — first choice, always.
+2. **Chakra UI + custom CSS** — when a Chakra component exists but needs a style that its props don't expose.
+3. **Third-party library** — only when Chakra has no equivalent component at all. Add a comment explaining why.
+4. **Custom component from scratch** — last resort. Must be placed in `components/ui/` and styled with Chakra tokens (`useToken`, `useColorModeValue`, CSS variables from the theme).
+
+## Rules
+
+- Never install a UI library (e.g. shadcn, MUI, Ant Design, Radix standalone) without explicit approval — Chakra already covers their use cases.
+- Never write raw inline `style={{}}` objects for layout or spacing — use Chakra's shorthand props (`px`, `mt`, `gap`, `w`, etc.).
+- Responsive styles use Chakra's array or object syntax: `fontSize={{ base: "sm", md: "md" }}`.
+- Dark mode support is built-in via `useColorModeValue` or semantic tokens — never hardcode hex colors.
+- Custom shared components live in `components/ui/` and must accept and forward Chakra's `BoxProps` or the relevant base component props so callers can override styles.
+<!-- END:ui -->
