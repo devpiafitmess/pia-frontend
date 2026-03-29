@@ -6,6 +6,8 @@ type ApiRequestOptions = Omit<RequestInit, "body"> & {
   baseUrl: string;
   path: string;
   service: string;
+  /** Request body. Accepts any value accepted by the Fetch API BodyInit. */
+  body?: BodyInit | null;
 };
 
 function buildUrl(baseUrl: string, path: string) {

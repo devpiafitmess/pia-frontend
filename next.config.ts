@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["@chakra-ui/react"],
   },
+  allowedDevOrigins: ["ec57-38-25-56-59.ngrok-free.app"],
 };
 
 export default nextConfig;

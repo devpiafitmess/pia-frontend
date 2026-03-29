@@ -6,7 +6,7 @@ const config = defineConfig({
       fontSize: "1rem",
     },
     "a": {
-      color: "var(--colors-pia-color-default)",
+      color: "{colors.pia-color.default}",
       textDecoration: "none",
       cursor: "pointer",
       transition: "text-decoration 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -123,7 +123,7 @@ const config = defineConfig({
     recipes: {
       link: {
         base: {
-          color: "var(--colors-pia-color-default)",
+          color: "{colors.pia-color.default}",
           textDecoration: "none",
           cursor: "pointer",
           transition: "text-decoration 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -136,21 +136,21 @@ const config = defineConfig({
         variants: {
           variant: {
             "pia-solid": {
-              bg: "var(--colors-pia-color-default)",
+              bg: "{colors.pia-color.default}",
               color: "white",
               borderRadius: "full",
               px: 4,
               _hover: {
-                bg: "var(--colors-pia-color-hover)",
+                bg: "{colors.pia-color.hover}",
               },
             },
             "pia-secondary": {
-              bg: "var(--colors-secondary-default)",
+              bg: "{colors.secondary.default}",
               color: "white",
               borderRadius: "full",
               px: 4,
               _hover: {
-                bg: "var(--colors-secondary-hover)",
+                bg: "{colors.secondary.hover}",
               },
             },
           },
