@@ -5,7 +5,7 @@ const config = defineConfig({
     "html, body": {
       fontSize: "1rem",
     },
-    "a": {
+    a: {
       color: "{colors.pia-color.default}",
       textDecoration: "none",
       cursor: "pointer",
@@ -20,7 +20,7 @@ const config = defineConfig({
       colors: {
         // Primary — pia-color (teal)
         "pia-color": {
-          50:  { value: "#edfafa" },
+          50: { value: "#edfafa" },
           100: { value: "#cff0f0" },
           200: { value: "#9fe2e2" },
           300: { value: "#4fcdcc" }, // dark mode default
@@ -34,7 +34,7 @@ const config = defineConfig({
         },
         // Secondary — coral (energético, contrapunto cálido al teal)
         coral: {
-          50:  { value: "#fff3ee" },
+          50: { value: "#fff3ee" },
           100: { value: "#fdddd0" },
           200: { value: "#fbb89e" },
           300: { value: "#f78e6c" },
@@ -48,7 +48,7 @@ const config = defineConfig({
         },
         // Neutrales — dark-first
         neutral: {
-          50:  { value: "#f5f5f5" },
+          50: { value: "#f5f5f5" },
           100: { value: "#e8e8e8" },
           200: { value: "#d0d0d0" },
           300: { value: "#a8a8a8" },
@@ -84,10 +84,16 @@ const config = defineConfig({
       colors: {
         // Primary
         "pia-color.default": {
-          value: { base: "{colors.pia-color.500}", _dark: "{colors.pia-color.300}" },
+          value: {
+            base: "{colors.pia-color.500}",
+            _dark: "{colors.pia-color.300}",
+          },
         },
         "pia-color.hover": {
-          value: { base: "{colors.pia-color.600}", _dark: "{colors.pia-color.400}" },
+          value: {
+            base: "{colors.pia-color.600}",
+            _dark: "{colors.pia-color.400}",
+          },
         },
         // Secondary
         "secondary.default": {
@@ -108,14 +114,20 @@ const config = defineConfig({
         },
         // Bordes
         "border.default": {
-          value: { base: "{colors.neutral.200}", _dark: "{colors.neutral.700}" },
+          value: {
+            base: "{colors.neutral.200}",
+            _dark: "{colors.neutral.700}",
+          },
         },
         // Texto
         "text.primary": {
           value: { base: "{colors.neutral.900}", _dark: "{colors.neutral.50}" },
         },
         "text.muted": {
-          value: { base: "{colors.neutral.500}", _dark: "{colors.neutral.400}" },
+          value: {
+            base: "{colors.neutral.500}",
+            _dark: "{colors.neutral.400}",
+          },
         },
       },
     },
@@ -140,6 +152,7 @@ const config = defineConfig({
               color: "white",
               borderRadius: "full",
               px: 4,
+              fontSize: "1rem",
               _hover: {
                 bg: "{colors.pia-color.hover}",
               },
@@ -149,6 +162,7 @@ const config = defineConfig({
               color: "white",
               borderRadius: "full",
               px: 4,
+              fontSize: "1rem",
               _hover: {
                 bg: "{colors.secondary.hover}",
               },

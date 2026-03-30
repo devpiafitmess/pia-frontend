@@ -52,10 +52,14 @@ export function ForgotPassword() {
 
       // Only surface genuine payload errors (status 400)
       const body = await res.json().catch(() => ({}));
-      setEmailError(body.error ?? "Error al enviar el enlace. Intentá de nuevo.");
+      setEmailError(
+        body.error ?? "Error al enviar el enlace. Intentá de nuevo.",
+      );
       setStatus("error");
     } catch {
-      setEmailError("Error de conexión. Verificá tu internet e intentá de nuevo.");
+      setEmailError(
+        "Error de conexión. Verificá tu internet e intentá de nuevo.",
+      );
       setStatus("error");
     }
   }
@@ -96,13 +100,12 @@ export function ForgotPassword() {
             <Text fontSize="2xl" fontWeight="bold" textAlign="center">
               ¡Listo!
             </Text>
-            <Text fontSize="sm" color="whiteAlpha.800" textAlign="center">
+            <Text color="whiteAlpha.800" textAlign="center">
               Si existe una cuenta con ese correo, recibirás un enlace para
               restablecer tu contraseña en los próximos minutos.
             </Text>
             <Link href="/" passHref>
               <Text
-                fontSize="sm"
                 color="whiteAlpha.700"
                 _hover={{ color: "white" }}
                 cursor="pointer"
@@ -113,7 +116,14 @@ export function ForgotPassword() {
             </Link>
           </VStack>
         ) : (
-          <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--chakra-spacing-6)" }}>
+          <form
+            onSubmit={onSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--chakra-spacing-6)",
+            }}
+          >
             <VStack gap={1} align="flex-start">
               <Text
                 fontSize="2xl"
@@ -123,14 +133,9 @@ export function ForgotPassword() {
               >
                 Olvidé la contraseña
               </Text>
-              <Text
-                fontSize="sm"
-                color="whiteAlpha.700"
-                textAlign="center"
-                w="100%"
-              >
-                Ingresá tu correo y te enviaremos un enlace para restablecer
-                tu contraseña.
+              <Text color="whiteAlpha.700" textAlign="center" w="100%">
+                Ingresá tu correo y te enviaremos un enlace para restablecer tu
+                contraseña.
               </Text>
             </VStack>
 
@@ -148,9 +153,7 @@ export function ForgotPassword() {
                 }}
                 disabled={isLoading}
               />
-              {emailError && (
-                <Field.ErrorText>{emailError}</Field.ErrorText>
-              )}
+              {emailError && <Field.ErrorText>{emailError}</Field.ErrorText>}
             </Field.Root>
 
             <VStack gap={3}>
@@ -165,7 +168,6 @@ export function ForgotPassword() {
               </Button>
               <Link href="/" passHref>
                 <Text
-                  fontSize="sm"
                   color="whiteAlpha.700"
                   _hover={{ color: "white" }}
                   cursor="pointer"

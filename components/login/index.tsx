@@ -79,7 +79,10 @@ export function Login() {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.value.trim(), password: password.value }),
+        body: JSON.stringify({
+          email: email.value.trim(),
+          password: password.value,
+        }),
       });
 
       if (res.ok) {
@@ -89,10 +92,15 @@ export function Login() {
 
       const body = await res.json().catch(() => ({}));
       setFormError(
-        getErrorMessage(body.code, "No fue posible iniciar sesión. Intentá de nuevo."),
+        getErrorMessage(
+          body.code,
+          "No fue posible iniciar sesión. Intentá de nuevo.",
+        ),
       );
     } catch {
-      setFormError("Error de conexión. Verificá tu internet e intentá de nuevo.");
+      setFormError(
+        "Error de conexión. Verificá tu internet e intentá de nuevo.",
+      );
     } finally {
       setLoading(false);
     }
@@ -128,7 +136,10 @@ export function Login() {
         boxShadow="xl"
         mb={10}
       >
-        <form onSubmit={onSubmit} style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+        <form
+          onSubmit={onSubmit}
+          style={{ height: "100%", display: "flex", flexDirection: "column" }}
+        >
           <Text fontSize="2xl" fontWeight="bold" mb={8} textAlign="center">
             Iniciar sesión
           </Text>
@@ -147,9 +158,7 @@ export function Login() {
                 }
                 disabled={loading}
               />
-              {email.error && (
-                <Field.ErrorText>{email.error}</Field.ErrorText>
-              )}
+              {email.error && <Field.ErrorText>{email.error}</Field.ErrorText>}
             </Field.Root>
 
             <Field.Root required invalid={!!password.error}>
@@ -172,7 +181,7 @@ export function Login() {
             </Field.Root>
 
             {formError && (
-              <Text color="red.300" fontSize="sm" w="100%" textAlign="center" mt={2}>
+              <Text color="red.300" w="100%" textAlign="center" mt={2}>
                 {formError}
               </Text>
             )}
@@ -188,9 +197,8 @@ export function Login() {
             >
               Iniciar sesión
             </Button>
-            <Text fontSize="sm" color="whiteAlpha.800">
-              ¿No tienes cuenta?{" "}
-              <Link href="/register">Regístrate aquí</Link>
+            <Text color="whiteAlpha.800">
+              ¿No tienes cuenta? <Link href="/register">Regístrate aquí</Link>
             </Text>
           </VStack>
         </form>
